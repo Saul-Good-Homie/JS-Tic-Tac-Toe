@@ -1,0 +1,88 @@
+/* CSS Reset */
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: "Arimo", sans-serif;
+}
+
+body {
+  background-color: #f1faee;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+a.hover {
+  text-decoration: underline;
+}
+
+/* Start of site specific styles */
+
+/* footer section */
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding-bottom: 3px;
+  width: 100%;
+  text-align: center;
+  background-color: #f1faee;
+}
+
+footer a:link {
+  /* color: white;
+    background-color: #e63946; */
+  background-color: #e63946;
+  border-radius: 28px;
+  border: 1px solid #e63946;
+  display: inline-block;
+  cursor: pointer;
+  color: #f1faee;
+  /* font-size: 17px; */
+  padding: 2px 8px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px rgb(240, 46, 62);
+}
+
+footer a:visited {
+  text-decoration: none;
+  color: #f1faee;
+}
+
+/* mouse over link */
+footer a:hover {
+  background-color: rgb(240, 72, 86);
+}
