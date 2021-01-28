@@ -1,40 +1,66 @@
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Tic-Tac-Toe</title>
-    <meta name="description" content="tictactoe" />
-    <!-- Required meta tags -->
+	<head>
+		<meta charset="utf-8" />
+		<title>Tic-Tac-Toe</title>
+		<meta name="description" content="tictactoe" />
+		<!-- Required meta tags -->
 
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <!-- Fontawesome -->
-    <script
-      src="https://kit.fontawesome.com/12500c009c.js"
-      crossorigin="anonymous"
-    ></script>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<!-- Fontawesome -->
+		<script
+			src="https://kit.fontawesome.com/12500c009c.js"
+			crossorigin="anonymous"
+		></script>
 
-    <!-- Google Fonts -->
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Arimo&display=swap");
-    </style>
+		<!-- Google Fonts -->
+		<style>
+			@import url("https://fonts.googleapis.com/css2?family=Arimo&display=swap");
+		</style>
 
-    <!-- Custom styles for this site -->
-    <link href="style.css" rel="stylesheet" />
-  </head>
+		<!-- Custom styles for this site -->
+		<link href="style.css" rel="stylesheet" />
+	</head>
 </html>
 <body>
-  <h1>Tic Tac Toe</h1>
+	<div class="container">
+		<div class="player-1">
+			<h2>Player 1</h2>
+			<h3>Team: X</h3>
+			<form>
+				<label for="name">Player Name:</label><br />
+				<input type="text" id="title" name="title" /><br />
+				<button type="button" class="btn">Submit</button>
+			</form>
+		</div>
+		<div class="board">
+			<h1>Tic Tac Toe</h1>
+			<div id="game-board"></div>
+		</div>
+		<div class="player-2">
+			<h2>Player 2</h2>
+			<h3>Team: O</h3>
+			<form>
+				<label for="name">Player Name:</label><br />
+				<input type="text" id="title" name="title" /><br />
+				<button type="button" class="btn">Submit</button>
+			</form>
+		</div>
+	</div>
 
-  <footer>
-    <p>
-      This site is a learning project by
-      <a href="https://twitter.com/saul_good_homie">Saul Belisle</a>, view the
-      code on
-      <a href="https://github.com/Saul-Good-Homie/JS-Tic-Tac-Toe">Github</a>.
-    </p>
-  </footer>
-  <!-- javascript -->
-  <script src="script.js"></script>
+	<footer>
+		<p>
+			This site is a learning project by
+			<a href="https://twitter.com/saul_good_homie">Saul Belisle</a>, view
+			the code on
+			<a href="https://github.com/Saul-Good-Homie/JS-Tic-Tac-Toe"
+				>Github</a
+			>.
+		</p>
+	</footer>
+
+	<!-- javascript -->
+	<script src="script.js"></script>
 </body>

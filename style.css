@@ -51,6 +51,48 @@ a.hover {
 
 /* Start of site specific styles */
 
+.container {
+  display: flex;
+  justify-content: center;
+  border: 1px solid red;
+}
+
+.player-1 {
+  text-align: center;
+  border: 1px solid black;
+  width: 25%;
+}
+
+.player-2 {
+  text-align: center;
+  border: 1px solid black;
+  width: 25%;
+}
+
+.board {
+  text-align: center;
+  border: 1px solid black;
+  width: 50%;
+}
+
+#game-board {
+  height: 250px;
+  display: grid;
+  border: 1px solid black;
+  grid-gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.move {
+  font-size: 32px;
+  border: 1px solid blue;
+}
+
+.move:hover {
+  background-color: bisque;
+}
+
 /* footer section */
 footer {
   position: fixed;
