@@ -29,14 +29,13 @@ const Game = (() => {
 			);
 
 			if (square.innerHTML == "") {
-				square.innerHTML = "HEY";
-				board[index] = "HEY";
+				square.innerHTML = gameController.activePlayer.marker;
+				board[index] = gameController.activePlayer.marker;
 			} else {
 				return;
 			}
-
-			console.log(index);
-			console.log(board);
+			//console.log(index);
+			//console.log(board);
 		};
 
 		document.querySelectorAll(".move").forEach((item) => {
@@ -51,5 +50,60 @@ const Game = (() => {
 	};
 })();
 
-Game.printBoard();
-Game.placeMarker();
+//factory function to create players
+const playerFactory = (name, marker) => {
+	const sayHello = () => console.log("hello!");
+	return { name, marker, sayHello };
+};
+
+// module to control the game
+const gameController = (() => {
+	//create 2 players from the player factory
+	const player1 = playerFactory("uno", "X");
+	const player2 = playerFactory("dos", "O");
+
+	//create the gameboard and start game
+	Game.printBoard();
+
+	// game starts with player 1
+	let activePlayer = player1;
+
+	const switchTurns = () => {
+		if (activePlayer == player1) {
+			activePlayer = player2;
+			//console.log("it is " + activePlayer.name + " turn");
+		} else {
+			activePlayer = player1;
+			//console.log("it is " + activePlayer.name + " turn");
+		}
+	};
+
+	const takeTurn = () => {
+		//check winner
+
+		//check active player
+		console.log(activePlayer);
+		//active player places marker
+		Game.placeMarker();
+		//switch active player
+
+		//repeat 9 times
+	};
+
+	const gamePlay = () => {
+		let n = 0;
+		while (n < 10) {
+			n++;
+			takeTurn();
+			switchTurns();
+		}
+	};
+
+	//return public
+	return {
+		activePlayer,
+		switchTurns,
+		takeTurn,
+		gamePlay,
+	};
+})();
