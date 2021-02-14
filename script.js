@@ -16,37 +16,13 @@ const Game = (() => {
 			//newSquare.addEventListener("click", placeMarker());
 			boardContainer.appendChild(newSquare);
 		};
-
 		board.forEach(appendChildren);
-	};
-
-	//function to place marker in DOM and update Board array
-	const placeMarker = () => {
-		const message = () => {
-			square = event.target;
-			const index = Array.from(square.parentNode.children).indexOf(
-				square
-			);
-
-			if (square.innerHTML == "") {
-				square.innerHTML = gameController.activePlayer.marker;
-				board[index] = gameController.activePlayer.marker;
-			} else {
-				return;
-			}
-			//console.log(index);
-			//console.log(board);
-		};
-
-		document.querySelectorAll(".move").forEach((item) => {
-			item.addEventListener("click", message);
-		});
 	};
 
 	//return public
 	return {
 		printBoard,
-		placeMarker,
+		board,
 	};
 })();
 
@@ -62,48 +38,111 @@ const gameController = (() => {
 	const player1 = playerFactory("uno", "X");
 	const player2 = playerFactory("dos", "O");
 
-	//create the gameboard and start game
-	Game.printBoard();
-
 	// game starts with player 1
 	let activePlayer = player1;
+
+	//function to add event listeners to all squares
+	const addListener = () => {
+		document.querySelectorAll(".move").forEach((item) => {
+			item.addEventListener("click", takeTurn);
+		});
+	};
+
+	//function to place marker in DOM and update Board array
+	const placeMarker = () => {
+		square = event.target;
+		const index = Array.from(square.parentNode.children).indexOf(square);
+
+		if (square.innerHTML == "") {
+			square.innerHTML = activePlayer.marker;
+			Game.board[index] = activePlayer.marker;
+		} else {
+			return;
+		}
+	};
+
+	let gameOver = false;
+
+	const takeTurn = () => {
+		if (gameOver == false) {
+			placeMarker();
+			checkWinner();
+			switchTurns();
+		} else {
+			return;
+		}
+	};
 
 	const switchTurns = () => {
 		if (activePlayer == player1) {
 			activePlayer = player2;
-			//console.log("it is " + activePlayer.name + " turn");
 		} else {
 			activePlayer = player1;
-			//console.log("it is " + activePlayer.name + " turn");
 		}
 	};
 
-	const takeTurn = () => {
-		//check winner
+	const checkWinner = () => {
+		let board = Game.board;
+		console.log(activePlayer.marker);
+		if (
+			//check horizontal
+			(board[0] === activePlayer.marker &&
+				board[1] === activePlayer.marker &&
+				board[2] === activePlayer.marker) ||
+			(board[3] === activePlayer.marker &&
+				board[4] === activePlayer.marker &&
+				board[5] === activePlayer.marker) ||
+			(board[6] === activePlayer.marker &&
+				board[7] === activePlayer.marker &&
+				board[8] === activePlayer.marker) ||
+			//check vertical
+			(board[0] === activePlayer.marker &&
+				board[3] === activePlayer.marker &&
+				board[6] === activePlayer.marker) ||
+			(board[1] === activePlayer.marker &&
+				board[4] === activePlayer.marker &&
+				board[7] === activePlayer.marker) ||
+			(board[2] === activePlayer.marker &&
+				board[5] === activePlayer.marker &&
+				board[8] === activePlayer.marker) ||
+			//check Diagonal
+			(board[0] === activePlayer.marker &&
+				board[4] === activePlayer.marker &&
+				board[8] === activePlayer.marker) ||
+			(board[2] === activePlayer.marker &&
+				board[4] === activePlayer.marker &&
+				board[6] === activePlayer.marker)
+		) {
+			celebrateWinner();
+		} else if (!board.includes("")) {
+			console.log("its a tie");
+			gameOver = true;
+		} else {
+			return;
+		}
+	};
 
-		//check active player
-		console.log(activePlayer);
-		//active player places marker
-		Game.placeMarker();
-		//switch active player
-
-		//repeat 9 times
+	const celebrateWinner = () => {
+		gameOver = true;
+		alert(activePlayer.name + " is the Winner");
 	};
 
 	const gamePlay = () => {
-		let n = 0;
-		while (n < 10) {
-			n++;
-			takeTurn();
-			switchTurns();
-		}
+		//create the gameboard
+		Game.printBoard();
+		//add event listeners to board squares
+		addListener();
+
+		return;
 	};
 
+	gamePlay();
 	//return public
 	return {
 		activePlayer,
-		switchTurns,
 		takeTurn,
+		switchTurns,
 		gamePlay,
+		addListener,
 	};
 })();
