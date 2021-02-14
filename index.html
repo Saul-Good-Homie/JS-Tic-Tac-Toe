@@ -31,27 +31,37 @@
 <body>
 	<div class="container">
 		<div class="player-1">
-			<h2>Player 1</h2>
-			<h3>Team: X</h3>
-			<form>
-				<label for="name">Player Name:</label><br />
+			<h2 id="playerName">Player 1</h2>
+			<div class="stats">
+				<h3>Team: X</h3>
+				<h3 id="player-1-score">Score: 0</h3>
+			</div>
+			<!-- <form>
+				<label for="name">Update Player Name:</label><br />
 				<input type="text" id="title" name="title" /><br />
 				<button type="button" class="btn">Submit</button>
-			</form>
+			</form> -->
 		</div>
 		<div class="board">
 			<h1>Tic Tac Toe</h1>
 			<div id="game-board"></div>
 		</div>
 		<div class="player-2">
-			<h2>Player 2</h2>
-			<h3>Team: O</h3>
-			<form>
-				<label for="name">Player Name:</label><br />
+			<h2 id="playerName">Player 2</h2>
+			<div class="stats">
+				<h3>Team: O</h3>
+				<h3 id="player-2-score">Score: 0</h3>
+			</div>
+			<!-- <form>
+				<label for="name">Update Player Name:</label><br />
 				<input type="text" id="title" name="title" /><br />
 				<button type="button" class="btn">Submit</button>
-			</form>
+			</form> -->
 		</div>
+	</div>
+	<div class="bottom-container">
+		<div id="message-box"></div>
+		<button id="reset">Reset</button>
 	</div>
 
 	<footer>

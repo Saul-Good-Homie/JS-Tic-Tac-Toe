@@ -3,17 +3,24 @@ const Game = (() => {
 	//private functions and properties
 
 	//Board stored as an array
-	const board = ["", "", "", "", "", "", "", "", ""];
+	let board = ["", "", "", "", "", "", "", "", ""];
+	const boardContainer = document.getElementById("game-board");
+
+	//remove existing child nodes
+	const clearBoard = () => {
+		while (boardContainer.firstChild) {
+			boardContainer.removeChild(boardContainer.firstChild);
+		}
+		board = ["", "", "", "", "", "", "", "", ""];
+		return;
+	};
 
 	//function to append array elements into html div
 	const printBoard = function () {
-		const boardContainer = document.getElementById("game-board");
-
 		const appendChildren = (item) => {
 			newSquare = document.createElement("div");
-			newSquare.textContent = item;
+			newSquare.innerHTML = item;
 			newSquare.classList.add("move");
-			//newSquare.addEventListener("click", placeMarker());
 			boardContainer.appendChild(newSquare);
 		};
 		board.forEach(appendChildren);
@@ -22,14 +29,30 @@ const Game = (() => {
 	//return public
 	return {
 		printBoard,
+		boardContainer,
 		board,
+		clearBoard,
 	};
+})();
+
+const DOM = (() => {
+	const xScore = document.getElementById("player-1-score");
+	const oScore = document.getElementById("player-2-score");
+	const messageBox = document.getElementById("message-box");
+	const reset = document.getElementById("reset");
+
+	//public
+	return { xScore, oScore, messageBox, reset };
 })();
 
 //factory function to create players
 const playerFactory = (name, marker) => {
-	const sayHello = () => console.log("hello!");
-	return { name, marker, sayHello };
+	this.score = 0;
+	const updateName = (newName) => {
+		this.name = newName;
+	};
+
+	return { name, marker, score };
 };
 
 // module to control the game
@@ -40,12 +63,15 @@ const gameController = (() => {
 
 	// game starts with player 1
 	let activePlayer = player1;
+	let gameOver = false;
 
 	//function to add event listeners to all squares
 	const addListener = () => {
 		document.querySelectorAll(".move").forEach((item) => {
 			item.addEventListener("click", takeTurn);
 		});
+
+		DOM.reset.addEventListener("click", reset);
 	};
 
 	//function to place marker in DOM and update Board array
@@ -56,12 +82,18 @@ const gameController = (() => {
 		if (square.innerHTML == "") {
 			square.innerHTML = activePlayer.marker;
 			Game.board[index] = activePlayer.marker;
+			square.removeEventListener("click", takeTurn);
 		} else {
 			return;
 		}
 	};
 
-	let gameOver = false;
+	const reset = () => {
+		Game.clearBoard();
+		activePlayer = player1;
+		gameOver = false;
+		gamePlay();
+	};
 
 	const takeTurn = () => {
 		if (gameOver == false) {
@@ -83,7 +115,6 @@ const gameController = (() => {
 
 	const checkWinner = () => {
 		let board = Game.board;
-		console.log(activePlayer.marker);
 		if (
 			//check horizontal
 			(board[0] === activePlayer.marker &&
@@ -115,7 +146,7 @@ const gameController = (() => {
 		) {
 			celebrateWinner();
 		} else if (!board.includes("")) {
-			console.log("its a tie");
+			DOM.messageBox.innerHTML = "It's a Tie";
 			gameOver = true;
 		} else {
 			return;
@@ -124,7 +155,8 @@ const gameController = (() => {
 
 	const celebrateWinner = () => {
 		gameOver = true;
-		alert(activePlayer.name + " is the Winner");
+		DOM.messageBox.innerHTML = activePlayer.name + " wins this round!";
+		activePlayer.score++;
 	};
 
 	const gamePlay = () => {
@@ -137,6 +169,7 @@ const gameController = (() => {
 	};
 
 	gamePlay();
+
 	//return public
 	return {
 		activePlayer,
