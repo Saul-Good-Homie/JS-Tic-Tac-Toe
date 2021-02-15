@@ -42,15 +42,17 @@ const DOM = (() => {
 	const reset = document.getElementById("reset");
 
 	//public
-	return { xScore, oScore, messageBox, reset };
+	return {
+		xScore,
+		oScore,
+		messageBox,
+		reset,
+	};
 })();
 
 //factory function to create players
 const playerFactory = (name, marker) => {
 	this.score = 0;
-	const updateName = (newName) => {
-		this.name = newName;
-	};
 
 	return { name, marker, score };
 };

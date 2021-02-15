@@ -96,6 +96,7 @@ a.hover {
 
 .move:hover {
 	background-color: #e0c3fc;
+	box-shadow: 0px 2px 8px 1px rgba(0, 0, 0, 0.4);
 }
 .bottom-container {
 	margin: auto;
@@ -141,11 +142,9 @@ footer a:link {
     background-color: #e63946; */
 	background-color: #157fe9;
 	border-radius: 28px;
-	border: 1px solid #157fe9;
 	display: inline-block;
 	cursor: pointer;
 	color: #f1faee;
-	/* font-size: 17px; */
 	padding: 2px 8px;
 	text-decoration: none;
 	text-shadow: 0px 1px 0px rgb(90, 77, 121);
