@@ -98,15 +98,14 @@ a.hover {
 	background-color: #e0c3fc;
 }
 .bottom-container {
-	margin-top: 20px;
 	margin: auto;
+	margin-top: 20px;
 	display: flex;
 	max-width: 50%;
 	justify-content: space-between;
 }
 
 #message-box {
-	border: solid 1px black;
 	flex-grow: 2;
 	min-height: 50px;
 	text-align: center;
@@ -114,6 +113,8 @@ a.hover {
 }
 
 button {
+	min-width: 10%;
+	font-size: 12px;
 	border-style: none;
 	color: white;
 	background-color: #157fe9;
@@ -138,16 +139,16 @@ footer {
 footer a:link {
 	/* color: white;
     background-color: #e63946; */
-	background-color: #e63946;
+	background-color: #157fe9;
 	border-radius: 28px;
-	border: 1px solid #e63946;
+	border: 1px solid #157fe9;
 	display: inline-block;
 	cursor: pointer;
 	color: #f1faee;
 	/* font-size: 17px; */
 	padding: 2px 8px;
 	text-decoration: none;
-	text-shadow: 0px 1px 0px rgb(240, 46, 62);
+	text-shadow: 0px 1px 0px rgb(90, 77, 121);
 }
 
 footer a:visited {
@@ -157,5 +158,5 @@ footer a:visited {
 
 /* mouse over link */
 footer a:hover {
-	background-color: rgb(240, 72, 86);
+	background-color: #096ed3;
 }

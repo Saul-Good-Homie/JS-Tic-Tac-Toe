@@ -11,7 +11,7 @@ const Game = (() => {
 		while (boardContainer.firstChild) {
 			boardContainer.removeChild(boardContainer.firstChild);
 		}
-		board = ["", "", "", "", "", "", "", "", ""];
+		Game.board = ["", "", "", "", "", "", "", "", ""];
 		return;
 	};
 
@@ -23,7 +23,7 @@ const Game = (() => {
 			newSquare.classList.add("move");
 			boardContainer.appendChild(newSquare);
 		};
-		board.forEach(appendChildren);
+		Game.board.forEach(appendChildren);
 	};
 
 	//return public
@@ -58,8 +58,17 @@ const playerFactory = (name, marker) => {
 // module to control the game
 const gameController = (() => {
 	//create 2 players from the player factory
-	const player1 = playerFactory("uno", "X");
-	const player2 = playerFactory("dos", "O");
+	const player1 = playerFactory("Player 1", "X");
+	const player2 = playerFactory("Player 2", "O");
+
+	//function to update scoreboard
+	const updateScore = (player) => {
+		if (player == player1) {
+			DOM.xScore.innerHTML = "Score: " + player1.score;
+		} else {
+			DOM.oScore.innerHTML = "Score: " + player2.score;
+		}
+	};
 
 	// game starts with player 1
 	let activePlayer = player1;
@@ -70,7 +79,6 @@ const gameController = (() => {
 		document.querySelectorAll(".move").forEach((item) => {
 			item.addEventListener("click", takeTurn);
 		});
-
 		DOM.reset.addEventListener("click", reset);
 	};
 
@@ -105,11 +113,18 @@ const gameController = (() => {
 		}
 	};
 
+	const turnIndicator = () => {
+		DOM.messageBox.innerHTML = "It is " + activePlayer.name + "'s turn.";
+	};
+
 	const switchTurns = () => {
 		if (activePlayer == player1) {
 			activePlayer = player2;
 		} else {
 			activePlayer = player1;
+		}
+		if (gameOver == false) {
+			turnIndicator();
 		}
 	};
 
@@ -155,11 +170,14 @@ const gameController = (() => {
 
 	const celebrateWinner = () => {
 		gameOver = true;
+		DOM.messageBox.innerHTML = "";
 		DOM.messageBox.innerHTML = activePlayer.name + " wins this round!";
 		activePlayer.score++;
+		updateScore(activePlayer);
 	};
 
 	const gamePlay = () => {
+		turnIndicator();
 		//create the gameboard
 		Game.printBoard();
 		//add event listeners to board squares
